@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 
 '''
@@ -71,6 +72,17 @@ Z[:] = X + Y  # Z里面所有的元素=x+y
 print('id(Z):', id(Z))
 # 后续计算中没有重复使用X， 我们也可以使用X[:] = X + Y或X += Y来减少操作的内存开销。
 before = id(X)
-X += Y
+X += Y  # 直接把Y的值加进X
 print(id(X) == before)
+# ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# 转换为其他python对象
+A = X.numpy()
+B = torch.tensor(A)
+print(type(A))
+print(type(B))
+# 大小为1的张量转换为Python标量，我们可以调用item函数或Python的内置函数。只能大小为一变
+a = np.array([3.5])
+print(a)
+print(a.item())  # numpy的一个浮点数
+print(float(a), int(a))  # 浮点数，整数
 
